@@ -8,17 +8,27 @@ class Main extends Component {
         <h1>Add Rides</h1>
         <form onSubmit={(event) => {
           event.preventDefault()
-          const name = this.rideName.value
+          const from = this.from.value
+          const to = this.to.value
           const fare = window.web3.utils.toWei(this.rideFare.value.toString(), 'Ether')
-          this.props.rideAdded(name, fare)
+          this.props.rideAdded(from, to, fare)
         }}>
           <div className="form-group mr-sm-2">
             <input
-              id="rideName"
+              id="from"
               type="text"
-              ref={(input) => { this.rideName = input }}
+              ref={(input) => { this.from = input }}
               className="form-control"
-              placeholder="Ride Name"
+              placeholder="from"
+              required />
+          </div>
+          <div className="form-group mr-sm-2">
+            <input
+              id="to"
+              type="text"
+              ref={(input) => { this.to = input }}
+              className="form-control"
+              placeholder="To"
               required />
           </div>
           <div className="form-group mr-sm-2">
@@ -38,9 +48,10 @@ class Main extends Component {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Route</th>
+              <th scope="col">Start</th>
+              <th scope="col">Destination</th>
               <th scope="col">fare</th>
-              <th scope="col">Owner</th>
+              <th scope="col">Name/Address</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -49,7 +60,8 @@ class Main extends Component {
               return(
                 <tr key={key}>
                   <th scope="row">{rides.id.toString()}</th>
-                  <td>{rides.route}</td>
+                  <td>{rides.from}</td>
+                  <td>{rides.to}</td>
                   <td>{window.web3.utils.fromWei(rides.fare.toString(), 'Ether')} Eth</td>
                   <td>{rides.owner}</td>
                   <td>

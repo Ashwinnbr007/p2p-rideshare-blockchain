@@ -7,7 +7,8 @@ contract rideshare {
 
     struct ride {
         uint id;
-        string route;
+        string from;
+        string to;
         uint fare;
         address payable owner;
         bool rideCompleted;
@@ -15,7 +16,8 @@ contract rideshare {
 
     event rideAdded(
         uint id,
-        string route,
+        string from,
+        string to,
         uint fare,
         address payable owner,
         bool rideCompleted
@@ -23,7 +25,8 @@ contract rideshare {
 
     event rideCompleted(
         uint id,
-        string route,
+        string from,
+        string to, 
         uint fare,
         address payable owner,
         bool rideCompleted
@@ -33,16 +36,13 @@ contract rideshare {
         name = "rideshare";
     }
 
-    function createRide(string memory _name, uint _price) public {
-        require(bytes(_name).length > 0);
-
+    function createRide(string memory _from, string memory _to, uint _price) public {
+        require(bytes(_from).length > 0);
+        require(bytes(_to).length > 0);
         require(_price > 0);
-
         rideCount ++;
-
-        riders[rideCount] = ride(rideCount, _name, _price, msg.sender, false);
-
-        emit rideAdded(rideCount, _name, _price, msg.sender, false);
+        riders[rideCount] = ride(rideCount, _from, _to, _price, msg.sender, false);
+        emit rideAdded(rideCount, _from, _to, _price, msg.sender, false);
     }
 
     function completeRide(uint _id) public payable {
@@ -67,6 +67,6 @@ contract rideshare {
         //pay the rider
         address(_rider).transfer(msg.value);
         // trigger the event
-        emit rideCompleted(rideCount, _ride.route, _ride.fare, msg.sender, true);
+        emit rideCompleted(rideCount, _ride.from, _ride.to, _ride.fare, msg.sender, true);
     }
 }

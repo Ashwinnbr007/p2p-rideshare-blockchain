@@ -21,7 +21,7 @@ class App extends Component {
       window.web3 = new Web3(window.web3.currentProvider)
     }
     else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+      window.alert('No metamask, try again!')
     }
   }
 
@@ -29,6 +29,7 @@ class App extends Component {
     const web3 = window.web3
     // Load account
     const accounts = await web3.eth.getAccounts()
+    // console.log(web3.eth.MyAccounts)
     this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId()
     const networkData = Rideshare.networks[networkId]
@@ -58,14 +59,13 @@ class App extends Component {
       rides: [],
       loading: true
     }
-
     this.rideAdded = this.rideAdded.bind(this)
     this.rideCompleted = this.rideCompleted.bind(this)
   }
 
-  rideAdded(name, price) {
+  rideAdded(from, to, price) {
     this.setState({ loading: true })
-    this.state.rideshare.methods.createRide(name, price).send({ from: this.state.account })
+    this.state.rideshare.methods.createRide(from, to, price).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })
