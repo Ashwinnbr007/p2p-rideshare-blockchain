@@ -59,7 +59,7 @@ contract rideshare {
         //rider cannot purchase the ride
         require(_rider != msg.sender);
         // Transfer ownership to the buyer - Not needed for ride transaction
-        //_ride.owner = msg.sender; - Use only for ride transfer
+            //_ride.owner = msg.sender; - Use only for ride transfer
         // Mark as rideCompleted
         _ride.rideCompleted = true;
         // Update the ride

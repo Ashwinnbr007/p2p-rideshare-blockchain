@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Web3 from 'web3'
 import './App.css';
 import Rideshare from '../abis/rideshare.json'
-import Navbar from './Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from './Navbar';
 import Main from './Main'
 
 class App extends Component {
@@ -83,7 +84,7 @@ class App extends Component {
     return (
       <div>
         <div className="container-fluid mt-5">
-          <Navbar account = {this.state.account} />
+          <NavBar account = {this.state.account} />
           <div className="row">
             <main role="main" className="col-lg-12 d-flex">
               { this.state.loading
