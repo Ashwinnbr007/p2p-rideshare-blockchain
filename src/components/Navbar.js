@@ -14,7 +14,7 @@ class NavBar extends Component {
             </Navbar.Collapse>
             <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <a className="text-white"><span id="account">Welcome  {this.props.account}</span></a>
+              <a className="text-white"><span id="account">Welcome {this.props.account}</span></a>
             </li>
             </ul>
         </Navbar>   

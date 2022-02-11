@@ -5,7 +5,7 @@ class Main extends Component {
   render() {
     return (
       <div id="content">
-        <h1>Add Rides</h1>
+        <h1><b>Add Rydes</b></h1>
         <form onSubmit={(event) => {
           event.preventDefault()
           const from = this.from.value
