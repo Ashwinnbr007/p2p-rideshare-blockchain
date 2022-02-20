@@ -5,19 +5,22 @@ class NavBar extends Component {
   render() {
     return (
       <>
-        <Navbar className='navbar-light bg-primary fixed-top flex-md-nowrap p-0 shadow'>
-            <a className="navbar-brand text-white col-sm-3 col-md-2 mr-0" href="#">Ryde</a>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav.Link className = "text-white" href="#home">About</Nav.Link>
-                <Nav.Link className = "text-white" href="#link">Available Rides</Nav.Link>
-            </Navbar.Collapse>
-            <ul className="navbar-nav px-3">
-            <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <a className="text-white"><span id="account">Welcome {this.props.account}</span></a>
-            </li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow">
+          <a class="navbar-brand text-white col-md-1 mr-0" href="#">Ryde</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home<span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Book Ryde</a>
+              </li>
             </ul>
-        </Navbar>   
+          </div>
+        </nav> 
       </>
     );
   }
