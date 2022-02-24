@@ -81,8 +81,8 @@ class Main extends Component {
                   <td>{rides.owner}</td>
                   <td>{window.web3.utils.hexToNumber(rides.seats.toString())}</td>
                   <td>
-                    {!rides.rideCompleted
-                      ? <button
+                    {
+                       <button
                         name={rides.id}
                         value={rides.fare}
                         onClick={(event) => {
@@ -93,7 +93,6 @@ class Main extends Component {
                       >
                         Purchase Ride
                       </button>
-                      : null
                     }
                   </td>
                 </tr>

@@ -30,7 +30,7 @@ class App extends Component {
     const web3 = window.web3
     // Load account
     const accounts = await web3.eth.getAccounts()
-    // console.log(web3.eth.MyAccounts)
+    // console.log(accounts)
     this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId()
     const networkData = Rideshare.networks[networkId]

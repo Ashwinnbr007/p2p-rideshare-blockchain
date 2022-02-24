@@ -12,7 +12,6 @@ contract rideshare {
         uint fare;
         uint seats;
         address payable owner;
-        bool rideCompleted;
     }
 
     event rideAdded(
@@ -21,8 +20,7 @@ contract rideshare {
         string to,
         uint fare,
         uint seats,
-        address payable owner,
-        bool rideCompleted
+        address payable owner
     );
 
     event rideCompleted(
@@ -30,8 +28,8 @@ contract rideshare {
         string from,
         string to, 
         uint fare,
-        address payable owner,
-        bool rideCompleted
+        uint seats,
+        address payable owner
     );
 
     constructor() public {
@@ -42,10 +40,9 @@ contract rideshare {
         require(bytes(_from).length > 0);
         require(bytes(_to).length > 0);
         require(_price > 0);
-        require(_seats > 0);
         rideCount ++;
-        riders[rideCount] = ride(rideCount, _from, _to, _price, _seats, msg.sender, false);
-        emit rideAdded(rideCount, _from, _to, _price, _seats, msg.sender, false);
+        riders[rideCount] = ride(rideCount, _from, _to, _price, _seats, msg.sender);
+        emit rideAdded(rideCount, _from, _to, _price, _seats, msg.sender);
     }
 
     function completeRide(uint _id) public payable {
@@ -57,12 +54,8 @@ contract rideshare {
         require(_ride.id > 0 && _ride.id <= rideCount);
         // check balance amt 
         require(msg.value >= _ride.fare);
-        //check ride has not been completed already
-        require(!_ride.rideCompleted);
         //rider cannot purchase the ride
         require(_rider != msg.sender);
-        // Mark as rideCompleted
-        _ride.rideCompleted = true;
         //update seats
         _ride.seats = _ride.seats-1;
         // Update the ride
@@ -70,6 +63,6 @@ contract rideshare {
         //pay the rider
         address(_rider).transfer(msg.value);
         // trigger the event
-        emit rideCompleted(rideCount, _ride.from, _ride.to, _ride.fare, msg.sender, true);
+        emit rideCompleted(rideCount, _ride.from, _ride.to, _ride.fare, _ride.seats, msg.sender);
     }
 }

@@ -42,6 +42,7 @@ contract('rideshare', ([deployer, seller, buyer]) => {
       assert.equal(event.from, 'tvm', 'from is correct')
       assert.equal(event.to, 'ekm', 'to is correct')
       assert.equal(event.fare, '1000000000000000000', 'fare is correct')
+      assert.equal(event.seats, 2, 'seat is correct')
       assert.equal(event.owner, seller, 'owner is correct')
       assert.equal(event.purchased, false, 'purchased is correct')
 
@@ -57,6 +58,7 @@ contract('rideshare', ([deployer, seller, buyer]) => {
       assert.equal(rides.from, 'tvm', 'from is correct')
       assert.equal(rides.to, 'ekm', 'to is correct')
       assert.equal(rides.fare, '1000000000000000000', 'fare is correct')
+      assert.equal(rides.seats, 2, 'seat is correct')
       assert.equal(rides.owner, seller, 'owner is correct')
       assert.equal(rides.purchased, false, 'purchased is correct')
     })
@@ -76,6 +78,7 @@ contract('rideshare', ([deployer, seller, buyer]) => {
       assert.equal(event.from, 'tvm', 'from is correct')
       assert.equal(event.to, 'ekm', 'to is correct')
       assert.equal(event.fare, '1000000000000000000', 'fare is correct')
+      assert.equal(rides.seats, 2, 'seat is correct')
       assert.equal(event.owner, buyer, 'owner is correct')
       assert.equal(event.purchased, true, 'purchased is correct')
 
