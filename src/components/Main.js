@@ -1,37 +1,29 @@
 import React, { Component } from 'react';
+import Autocomp from './placesAutocomplete'
 
 class Main extends Component {
 
   render() {
     return (
       <div id="content">
-        <h1><b>Add Rydes</b></h1>
+        <h1 className='text-center'><b>Add <b>Rydes</b></b></h1>
         <form onSubmit={(event) => {
           event.preventDefault()
-          const from = this.from.value
-          const to = this.to.value
+          const from = document.getElementById('from').value
+          const to = document.getElementById('to').value
           const seat = this.inp_seat.value
           const fare = window.web3.utils.toWei(this.rideFare.value.toString(), 'Ether')
           this.props.rideAdded(from, to, fare, seat)
         }}>
+          
           <div className="form-group mr-sm-2">
-            <input
-              id="from"
-              type="text"
-              ref={(input) => { this.from = input }}
-              className="form-control"
-              placeholder="from"
-              required />
+            <Autocomp placeHold={'from'}/>
           </div>
+
           <div className="form-group mr-sm-2">
-            <input
-              id="to"
-              type="text"
-              ref={(input) => { this.to = input }}
-              className="form-control"
-              placeholder="To"
-              required />
+            <Autocomp placeHold={'to'}/>
           </div>
+
           <div className="form-group mr-sm-2">
             <input
               id="inp_seat"
