@@ -22,7 +22,7 @@ class App extends Component {
       window.web3 = new Web3(window.web3.currentProvider)
     }
     else {
-      window.alert('No metamask, try again!')
+      window.alert('No metamask detected, try again!')
     }
   }
 
@@ -34,7 +34,7 @@ class App extends Component {
     this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId()
     const networkData = Rideshare.networks[networkId]
-    if(networkData) {
+    if (networkData) {
       const rideshare = web3.eth.Contract(Rideshare.abi, networkData.address)
       this.setState({ rideshare })
       const rideCount = await rideshare.methods.rideCount().call()
@@ -46,7 +46,7 @@ class App extends Component {
           rides: [...this.state.rides, rides]
         })
       }
-      this.setState({ loading: false})
+      this.setState({ loading: false })
     } else {
       window.alert('rideshare contract not deployed to detected network.')
     }
@@ -64,30 +64,30 @@ class App extends Component {
     this.rideCompleted = this.rideCompleted.bind(this)
   }
 
-  rideAdded(from, to, price) {
+  rideAdded(from, to, price, seat) {
     this.setState({ loading: true })
-    this.state.rideshare.methods.createRide(from, to, price).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
+    this.state.rideshare.methods.createRide(from, to, price, seat).send({ from: this.state.account })
+      .once('receipt', (receipt) => {
+        this.setState({ loading: false })
+      })
   }
 
   rideCompleted(id, price) {
     this.setState({ loading: true })
     this.state.rideshare.methods.completeRide(id).send({ from: this.state.account, value: price })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
+      .once('receipt', (receipt) => {
+        this.setState({ loading: false })
+      })
   }
 
   render() {
     return (
       <div>
-        <div className="container-fluid mt-5">
-          <NavBar account = {this.state.account} />
+        <div className="container-fluid mt-5" id='mainDiv'>
+          <NavBar account={this.state.account} />
           <div className="row">
             <main role="main" className="col-lg-12 d-flex">
-              { this.state.loading
+              {this.state.loading
                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
                 : <Main
                   rides={this.state.rides}
