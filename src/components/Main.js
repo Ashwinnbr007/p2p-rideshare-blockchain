@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Autocomp from './placesAutocomplete'
 
+
 class Main extends Component {
 
   render() {
+    let rideNumber = 1;
     return (
       <div id="content">
         <h1 className='text-center'><b>Add <b>Rydes</b></b></h1>
@@ -15,13 +17,13 @@ class Main extends Component {
           const fare = window.web3.utils.toWei(this.rideFare.value.toString(), 'Ether')
           this.props.rideAdded(from, to, fare, seat)
         }}>
-          
+
           <div className="form-group mr-sm-2">
-            <Autocomp placeHold={'from'}/>
+            <Autocomp placeHold={'from'} />
           </div>
 
           <div className="form-group mr-sm-2">
-            <Autocomp placeHold={'to'}/>
+            <Autocomp placeHold={'to'} />
           </div>
 
           <div className="form-group mr-sm-2">
@@ -43,9 +45,17 @@ class Main extends Component {
               placeholder="Ride Fare"
               required />
           </div>
-          <button type="submit" className="btn btn-dark">Add Ride</button>
+          <button type="submit"
+            className="btn btn-dark"
+            onClick={(event) => {
+              rideNumber += 1
+              console.log(rideNumber)
+            }} >
+            Add Ride
+          </button>
         </form>
         <p>&nbsp;</p>
+        {/* <add Distance Matrix API> */}
         <h2>Check Current Rides Available</h2>
         <table className="table">
           <thead>
@@ -62,35 +72,38 @@ class Main extends Component {
           <tbody id="rideList">
             {this.props.rides.map((rides, key) => {
               let availableSeats = window.web3.utils.hexToNumber(rides.seats.toString())
-              console.log(availableSeats)
-              if (availableSeats)
-              {return (
-                <tr key={key}>
-                  <th scope="row">{rides.id.toString()}</th>
-                  <td>{rides.from}</td>
-                  <td>{rides.to}</td>
-                  <td>{window.web3.utils.fromWei(rides.fare.toString(), 'Ether')} Eth</td>
-                  <td>{rides.owner}</td>
-                  <td>{window.web3.utils.hexToNumber(rides.seats.toString())}</td>
-                  <td>
-                    {
-                       <button
-                        name={rides.id}
-                        value={rides.fare}
-                        onClick={(event) => {
-                          this.props.rideCompleted(event.target.name, event.target.value)
-                          availableSeats-=1
-                          console.log(availableSeats)
-                        }}
-                      >
-                        Purchase Ride
-                      </button>
-                    }
-                  </td>
-                </tr>
-              )}
+              // let rideNumber=1
+              console.log('key :', rideNumber.toString()) 
+              if (availableSeats) {
+                return (
+                  <tr key={key}>
+                    <td scope="row"><b>{rideNumber++}</b></td>
+                    <td>{rides.from}</td>
+                    <td>{rides.to}</td>
+                    <td>{window.web3.utils.fromWei(rides.fare.toString(), 'Ether')} Eth</td>
+                    <td>{rides.owner}</td>
+                    <td>{window.web3.utils.hexToNumber(rides.seats.toString())}</td>
+                    <td>
+                      {
+                        <button
+                          name={rides.id}
+                          value={rides.fare}
+                          onClick={(event) => {
+                            this.props.rideCompleted(event.target.name, event.target.value)
+                            availableSeats -= 1
+                            rideNumber -= 1
+                            console.log(rideNumber)
+                          }}
+                        >
+                          Purchase Ride
+                        </button>
+                      }
+                    </td>
+                  </tr>
+                )
+              }
               else {
-                return(
+                return (
                   <div>
                   </div>
                 )

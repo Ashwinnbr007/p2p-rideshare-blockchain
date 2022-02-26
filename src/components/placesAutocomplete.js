@@ -39,7 +39,8 @@ export default function placesAuto({placeHold}) {
 
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                  backgroundColor: suggestion.active ? "#424242" : "#fff",
+                  color: suggestion.active ? '#fff' : null
                 };
                 return (
                   <div {...getSuggestionItemProps(suggestion, { style })}>
