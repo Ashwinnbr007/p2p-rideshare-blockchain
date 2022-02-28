@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './logout.css'
 
 class NavBar extends Component {
   render() {

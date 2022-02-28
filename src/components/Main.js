@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import Autocomp from './placesAutocomplete'
-import DistanceMatrix from './distanceMatrix';
+import DistanceMatrix from './DistanceMatrix';
 
 class Main extends Component {
 
@@ -64,16 +64,6 @@ class Main extends Component {
             }} >
             Add Ryde
           </button>
-
-          {/* <button type="submit"
-            className="btn btn-dark"
-
-            onClick={(event) => {
-              
-            }} >
-            Calculate distance
-          </button> */}
-
         </form>
         <p>&nbsp;</p>
         <h2>Check Current Rydes Available</h2>
@@ -103,6 +93,7 @@ class Main extends Component {
                     <td>{rides.name}</td>
                     <td>{rides.owner}</td>
                     <td>{availableSeats}</td>
+                    {/* <td>{document.getElementById('totalDistance')}</td> */}
                     <td>
                       {
                         <button
