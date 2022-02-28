@@ -38,6 +38,16 @@ class Main extends Component {
 
           <div className="form-group mr-sm-2">
             <input
+              id="rideFare"
+              type="text"
+              ref={(input) => { this.rideFare = input }}
+              className="form-control"
+              placeholder="Ride Fare"
+              required />
+          </div>
+
+          <div className="form-group mr-sm-2">
+            <input
               id="inp_seat"
               type="number"
               min='1'
@@ -46,16 +56,7 @@ class Main extends Component {
               placeholder="No of seats"
               required />
           </div>
-
-          <div className="form-group mr-sm-2">
-            <input
-              id="rideFare"
-              type="text"
-              ref={(input) => { this.rideFare = input }}
-              className="form-control"
-              placeholder="Ride Fare"
-              required />
-          </div>
+          
           <button type="submit"
             className="btn btn-dark"
             onClick={(event) => {
@@ -93,10 +94,10 @@ class Main extends Component {
                     <td>{rides.name}</td>
                     <td>{rides.owner}</td>
                     <td>{availableSeats}</td>
-                    {/* <td>{document.getElementById('totalDistance')}</td> */}
                     <td>
                       {
                         <button
+                          className="btn btn-outline-success"
                           name={rides.id}
                           value={rides.fare}
                           onClick={(event) => {
