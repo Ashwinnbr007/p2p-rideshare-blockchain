@@ -85,6 +85,7 @@ class App extends Component {
       <div>
         <div className="container-fluid mt-5">
           <NavBar account = {this.state.account} />
+          <br></br>
           <div className="row">
             <main role="main" className="col-lg-12 d-flex">
               { this.state.loading
