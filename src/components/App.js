@@ -64,9 +64,9 @@ class App extends Component {
     this.rideCompleted = this.rideCompleted.bind(this)
   }
 
-  rideAdded(from, to, price, seats) {
+  rideAdded(name, from, to, price, seats) {
     this.setState({ loading: true })
-    this.state.rideshare.methods.createRide(from, to, price, seats).send({ from: this.state.account })
+    this.state.rideshare.methods.createRide(name, from, to, price, seats).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })

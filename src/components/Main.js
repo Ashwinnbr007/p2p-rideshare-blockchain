@@ -11,12 +11,22 @@ class Main extends Component {
         <h1 className='text-center'><b>Add <b>Rydes</b></b></h1>
         <form onSubmit={(event) => {
           event.preventDefault()
+          const name = this.name.value
           const from = document.getElementById('from').value
           const to = document.getElementById('to').value
           const seat = this.inp_seat.value
           const fare = window.web3.utils.toWei(this.rideFare.value.toString(), 'Ether')
-          this.props.rideAdded(from, to, fare, seat)
+          this.props.rideAdded(name, from, to, fare, seat)
         }}>
+          <div className="form-group mr-sm-2">
+            <input
+              id="name"
+              type="text"
+              ref={(input) => { this.name = input }}
+              className="form-control"
+              placeholder="Driver Name"
+              required />
+          </div>
 
           <div className="form-group mr-sm-2">
             <Autocomp placeHold={'from'} />
@@ -36,6 +46,7 @@ class Main extends Component {
               placeholder="No of seats"
               required />
           </div>
+          
           <div className="form-group mr-sm-2">
             <input
               id="rideFare"
@@ -63,8 +74,9 @@ class Main extends Component {
               <th scope="col">#</th>
               <th scope="col">Start</th>
               <th scope="col">Destination</th>
-              <th scope="col">fare</th>
-              <th scope="col">Address</th>
+              <th scope="col">Fare</th>
+              <th scope="col">Name</th>
+              <th scope="col">Block address</th>
               <th scope="col">Seats</th>
               <th scope="col"></th>
             </tr>
@@ -72,8 +84,6 @@ class Main extends Component {
           <tbody id="rideList">
             {this.props.rides.map((rides, key) => {
               let availableSeats = window.web3.utils.hexToNumber(rides.seats.toString())
-              // let rideNumber=1
-              console.log('key :', rideNumber.toString()) 
               if (availableSeats) {
                 return (
                   <tr key={key}>
@@ -81,6 +91,7 @@ class Main extends Component {
                     <td>{rides.from}</td>
                     <td>{rides.to}</td>
                     <td>{window.web3.utils.fromWei(rides.fare.toString(), 'Ether')} Eth</td>
+                    <td>{rides.name}</td>
                     <td>{rides.owner}</td>
                     <td>{window.web3.utils.hexToNumber(rides.seats.toString())}</td>
                     <td>
@@ -92,7 +103,6 @@ class Main extends Component {
                             this.props.rideCompleted(event.target.name, event.target.value)
                             availableSeats -= 1
                             rideNumber -= 1
-                            console.log(rideNumber)
                           }}
                         >
                           Purchase Ride

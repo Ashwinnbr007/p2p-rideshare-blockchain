@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
-export default function placesAuto({placeHold}) {
+export default function placesAuto({ placeHold }) {
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -26,13 +26,13 @@ export default function placesAuto({placeHold}) {
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div>
+          <div>
             {/* <p>Latitude: {coordinates.lat}</p>
             <p>Longitude: {coordinates.lng}</p> */}
             <input
               id={placeHold}
               type="text"
-              className="form-control"              
+              className="form-control"
               {...getInputProps({ placeholder: placeHold })} />
             <div>
               {loading ? <div>...loading</div> : null}
@@ -49,6 +49,7 @@ export default function placesAuto({placeHold}) {
                 );
               })}
             </div>
+            {/* distance matrix API */}
           </div>
         )}
       </PlacesAutocomplete>

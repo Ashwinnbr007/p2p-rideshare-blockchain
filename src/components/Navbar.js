@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class NavBar extends Component {
   render() {
     return (
@@ -13,10 +12,10 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="#">Home<span className="sr-only"></span></a>
+                <a className="nav-link" href="#">Book Ryde</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Book Ryde</a>
+                <a className="nav-link" href="#">Home<span className="sr-only"></span></a>
               </li>
             </ul>
           </div>

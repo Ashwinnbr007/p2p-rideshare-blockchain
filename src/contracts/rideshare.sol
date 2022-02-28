@@ -7,6 +7,7 @@ contract rideshare {
 
     struct ride {
         uint id;
+        string name;
         string from;
         string to;
         uint fare;
@@ -16,6 +17,7 @@ contract rideshare {
 
     event rideAdded(
         uint id,
+        string name,
         string from,
         string to,
         uint fare,
@@ -36,13 +38,14 @@ contract rideshare {
         name = "rideshare";
     }
 
-    function createRide(string memory _from, string memory _to, uint _price, uint _seats) public {
+    function createRide(string memory _name, string memory _from, string memory _to, uint _price, uint _seats) public {
+        require(bytes(_name).length > 0);
         require(bytes(_from).length > 0);
         require(bytes(_to).length > 0);
         require(_price > 0);
         rideCount ++;
-        riders[rideCount] = ride(rideCount, _from, _to, _price, _seats, msg.sender);
-        emit rideAdded(rideCount, _from, _to, _price, _seats, msg.sender);
+        riders[rideCount] = ride(rideCount,_name, _from, _to, _price, _seats, msg.sender);
+        emit rideAdded(rideCount,_name, _from, _to, _price, _seats, msg.sender);
     }
 
     function completeRide(uint _id) public payable {
