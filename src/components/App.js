@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3'
-import './App.css';
+// import './App.css';
 import Rideshare from '../abis/rideshare.json'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './Navbar';

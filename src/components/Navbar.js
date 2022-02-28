@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './logout.css'
 
 class NavBar extends Component {
   render() {
@@ -18,6 +19,9 @@ class NavBar extends Component {
                 <a className="nav-link" href="#">Home<span className="sr-only"></span></a>
               </li>
             </ul>
+            <button className='btn btn-outline-danger'>
+              logout
+            </button>
           </div>
         </nav> 
       </>

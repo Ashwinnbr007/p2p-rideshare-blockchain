@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Autocomp from './placesAutocomplete'
-
+import DistanceMatrix from './distanceMatrix';
 
 class Main extends Component {
 
@@ -29,12 +29,12 @@ class Main extends Component {
           </div>
 
           <div className="form-group mr-sm-2">
-            <Autocomp placeHold={'from'} />
+            <DistanceMatrix /> 
           </div>
 
-          <div className="form-group mr-sm-2">
+          {/* <div className="form-group mr-sm-2">
             <Autocomp placeHold={'to'} />
-          </div>
+          </div> */}
 
           <div className="form-group mr-sm-2">
             <input
@@ -62,12 +62,21 @@ class Main extends Component {
               rideNumber += 1
               console.log(rideNumber)
             }} >
-            Add Ride
+            Add Ryde
           </button>
+
+          {/* <button type="submit"
+            className="btn btn-dark"
+
+            onClick={(event) => {
+              
+            }} >
+            Calculate distance
+          </button> */}
+
         </form>
         <p>&nbsp;</p>
-        {/* <add Distance Matrix API> */}
-        <h2>Check Current Rides Available</h2>
+        <h2>Check Current Rydes Available</h2>
         <table className="table">
           <thead>
             <tr>
