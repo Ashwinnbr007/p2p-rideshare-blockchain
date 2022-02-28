@@ -21,7 +21,7 @@ class Main extends Component {
           <div className="form-group mr-sm-2">
             <input
               id="name"
-              type="text"
+              type="string"
               ref={(input) => { this.name = input }}
               className="form-control"
               placeholder="Driver Name"
@@ -46,7 +46,7 @@ class Main extends Component {
               placeholder="No of seats"
               required />
           </div>
-          
+
           <div className="form-group mr-sm-2">
             <input
               id="rideFare"
@@ -93,7 +93,7 @@ class Main extends Component {
                     <td>{window.web3.utils.fromWei(rides.fare.toString(), 'Ether')} Eth</td>
                     <td>{rides.name}</td>
                     <td>{rides.owner}</td>
-                    <td>{window.web3.utils.hexToNumber(rides.seats.toString())}</td>
+                    <td>{availableSeats}</td>
                     <td>
                       {
                         <button

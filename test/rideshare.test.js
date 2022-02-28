@@ -55,6 +55,7 @@ contract('rideshare', ([deployer, seller, buyer]) => {
     it('lists rides', async () => {
       const rides = await rideshare.riders(rideCount)
       assert.equal(rides.id.toNumber(), rideCount.toNumber(), 'id is correct')
+      assert.equal(rides.name, 'ashwin nambiar', 'name is correct')
       assert.equal(rides.from, 'tvm', 'from is correct')
       assert.equal(rides.to, 'ekm', 'to is correct')
       assert.equal(rides.fare, '1000000000000000000', 'fare is correct')
@@ -75,10 +76,11 @@ contract('rideshare', ([deployer, seller, buyer]) => {
       // Check logs
       const event = result.logs[0].args
       assert.equal(event.id.toNumber(), rideCount.toNumber(), 'id is correct')
+      assert.equal(event.name, 'ashwin nambiar', 'name is correct')
       assert.equal(event.from, 'tvm', 'from is correct')
       assert.equal(event.to, 'ekm', 'to is correct')
       assert.equal(event.fare, '1000000000000000000', 'fare is correct')
-      assert.equal(rides.seats, 2, 'seat is correct')
+      assert.equal(event.seats, 2, 'seat is correct')
       assert.equal(event.owner, buyer, 'owner is correct')
       assert.equal(event.purchased, true, 'purchased is correct')
 
@@ -93,14 +95,14 @@ contract('rideshare', ([deployer, seller, buyer]) => {
       const exepectedBalance = oldSellerBalance.add(fare)
       assert.equal(newSellerBalance.toString(), exepectedBalance.toString())
 
+      //FAILURE: Tries to insert number into name form
+      await marketplace.completeRide(rideCount, '1234',{ from: buyer, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
       // FAILURE: Tries to purchase a ride that does not exist
-      await marketplace.completeRide(99, { from: buyer, value: web3.utils.toWei('1', 'Ether')}).should.be.rejected;      // FAILURE: Buyer tries to buy without enough ether
+      await marketplace.completeRide(99, 'ashwin nambiar', { from: buyer, value: web3.utils.toWei('1', 'Ether')}).should.be.rejected;      // FAILURE: Buyer tries to buy without enough ether
       // FAILURE: Passenger tries to buy without enough ether
-      await marketplace.completeRide(rideCount, { from: buyer, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
-      // FAILURE: deployer tries to purchase the ride, i.e., ride can't be purchased twice
-      await marketplace.completeRide(rideCount, { from: deployer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
-      // FAILURE: Passenger tries to buy again
-      await marketplace.completeRide(rideCount, { from: buyer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
+      await marketplace.completeRide(rideCount,'ashwin nambiar' ,{ from: buyer, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
+      // FAILURE: deployer tries to purchase the ride 
+      await marketplace.completeRide(rideCount,'ashwin nambiar' ,{ from: deployer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;  
     })
 
   })
