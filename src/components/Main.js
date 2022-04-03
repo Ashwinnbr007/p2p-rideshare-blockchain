@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import Autocomp from './placesAutocomplete'
 import DistanceMatrix from './DistanceMatrix';
 
 class Main extends Component {
